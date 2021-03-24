@@ -39,9 +39,9 @@ class Transformer(nn.Module):
 
         return posEmb
     def forward(self, inputs):
-        print(inputs.shape)
+        
         embInputs=self.emb(inputs)
-        print(embInputs.shape)
+        
         stop=inputs.shape[1]
         posEmb=self.posemb[stop-1,:]
         modelIn=embInputs+posEmb
