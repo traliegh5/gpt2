@@ -17,7 +17,7 @@ hyper_params = {
      "num_epochs": 3,
      "learning_rate": 0.0005,
      "window_size":50,
-     "embedding_size":1024,
+     "embedding_size":512,
      "vocab_size":50257
  }
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu" )
