@@ -177,7 +177,7 @@ if __name__ == "__main__":
         
         model=GPT2_Transformer().to(device)
         pass
-    tokenizer=GPT2Tokenizer.from_pretrained('gpt2').to(device)
+    tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
     train_file="penn-UNK-train.txt"
     test_file="penn-UNK-test.txt"
     train_loader,test_loader=load_dataset(train_file,test_file,hyper_params["window_size"],tokenizer,hyper_params["batch_size"],GPT)
