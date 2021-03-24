@@ -169,15 +169,15 @@ if __name__ == "__main__":
     if args.model == "transformer":
         # Load your transformer
         GPT=False
-        model=Transformer(vocab_size,hyper_params["embedding_size"],hyper_params["window_size"],device)
+        model=Transformer(vocab_size,hyper_params["embedding_size"],hyper_params["window_size"],device).to(device)
         
     elif args.model == "gpt2":
         GPT=True
         # Load the GPT2 model
         
-        model=GPT2_Transformer()
+        model=GPT2_Transformer().to(device)
         pass
-    tokenizer=GPT2Tokenizer.from_pretrained('gpt2')
+    tokenizer=GPT2Tokenizer.from_pretrained('gpt2').to(device)
     train_file="penn-UNK-train.txt"
     test_file="penn-UNK-test.txt"
     train_loader,test_loader=load_dataset(train_file,test_file,hyper_params["window_size"],tokenizer,hyper_params["batch_size"],GPT)
