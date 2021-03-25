@@ -183,7 +183,7 @@ if __name__ == "__main__":
     test_file="penn-UNK-test.txt"
     train_loader,test_loader=load_dataset(train_file,test_file,hyper_params["window_size"],tokenizer,hyper_params["batch_size"],GPT)
     
-
+    torch.cuda.empty_cache()
     if not GPT:
         train(experiment, model,hyper_params,train_loader)
     # Train the model if args.model == "transformer"
