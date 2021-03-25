@@ -25,6 +25,7 @@ experiment = Experiment(project_name="gtp-2")
 experiment.log_parameters(hyper_params)
 
 def train(experiment,model,hyper_params,train_loader):
+    torch.cuda.empty_cache()
     loss_fn=nn.CrossEntropyLoss(ignore_index=hyper_params["vocab_size"])
     optimizer=optim.Adam(model.parameters(),lr=hyper_params["learning_rate"])
     model = model.train()
