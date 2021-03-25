@@ -63,6 +63,7 @@ class encoderLayer(nn.Module):
         
         self.embedding_size=embedding_size
         hidden_size=self.embedding_size
+        self.relu=nn.ReLU()
         self.L1=nn.Linear(self.embedding_size,hidden_size)
         self.L2=nn.Linear(hidden_size,hidden_size)
         self.L3=nn.Linear(hidden_size,self.embedding_size)
@@ -78,7 +79,9 @@ class encoderLayer(nn.Module):
         
         attNew=self.norm(inputs+att)
         lin=self.L1(attNew)
+        lin=self.relu(lin)
         lin=self.L2(lin)
+        lin=self.relu(lin)
         lin=self.L3(lin)
         linNew=self.norm(lin+attNew)
 
