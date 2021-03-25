@@ -120,8 +120,8 @@ def test(experiment, model,hyper_params,test_loader,GPT):
                     
                     # print(out.logits.shape[2])
                 else:
-                    inner=inputs[:,0:-1]
-                    labs=labels[:,1:]
+                    inner=inputs[0:-1,:]
+                    labs=labels[1:,:]
                     preds = model(inner)
                     # print("x",y_pred.shape)
                     # print("y",y.shape)
