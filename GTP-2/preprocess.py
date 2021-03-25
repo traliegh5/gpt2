@@ -14,7 +14,7 @@ def load_dataset(train_file,test_file, window_size,tokenizer, batch_size,GPT):
     train_set=LanguageModel(train_file,window_size,tokenizer,GPT)
     test_set=LanguageModel(test_file,window_size,tokenizer,GPT)
 
-    train_loader=DataLoader(train_set,batch_size=batch_size)
+    train_loader=DataLoader(train_set,batch_size=batch_size,shuffle=True)
     test_loader=DataLoader(test_set,batch_size=batch_size)
     
     return train_loader,test_loader
