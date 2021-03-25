@@ -13,9 +13,9 @@ from torch import nn, optim
 
 
 hyper_params = {
-     "batch_size": 500,
-     "num_epochs": 3,
-     "learning_rate": 0.0005,
+     "batch_size": 100,
+     "num_epochs": 1,
+     "learning_rate": 0.001,
      "window_size":50,
      "embedding_size":512,
      "vocab_size":50257
@@ -26,6 +26,7 @@ experiment.log_parameters(hyper_params)
 
 def train(experiment,model,hyper_params,train_loader):
     torch.cuda.empty_cache()
+    torch.cuda.memory_summary(device=device, abbreviated=False)
     loss_fn=nn.CrossEntropyLoss(ignore_index=hyper_params["vocab_size"])
     optimizer=optim.Adam(model.parameters(),lr=hyper_params["learning_rate"])
     model = model.train()
