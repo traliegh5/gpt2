@@ -13,10 +13,10 @@ from torch import nn, optim
 
 
 hyper_params = {
-     "batch_size": 100,
+     "batch_size": 500,
      "num_epochs": 3,
-     "learning_rate": 0.01,
-     "window_size":70,
+     "learning_rate": 0.0005,
+     "window_size":50,
      "embedding_size":512,
      "vocab_size":50257
  }
