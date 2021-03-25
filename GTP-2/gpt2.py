@@ -14,8 +14,8 @@ from torch import nn, optim
 
 hyper_params = {
      "batch_size": 100,
-     "num_epochs": 3,
-     "learning_rate": 0.0005,
+     "num_epochs": 1,
+     "learning_rate": 0.001,
      "window_size":50,
      "embedding_size":512,
      "vocab_size":50257
