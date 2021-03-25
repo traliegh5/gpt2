@@ -97,7 +97,7 @@ def train(experiment,model,hyper_params,train_loader):
     pass
 def test(experiment, model,hyper_params,test_loader,GPT):
     if not GPT:
-        loss_fn=nn.CrossEntropyLoss(ignore_index=hyper_params["vocab_size"],reduction="sum")
+        loss_fn=nn.CrossEntropyLoss(ignore_index=hyper_params["vocab_size"])
     
     model = model.eval()
     total_loss = 0
