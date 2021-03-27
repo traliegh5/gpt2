@@ -16,7 +16,7 @@ hyper_params = {
      "batch_size": 100,
      "num_epochs": 1,
      "learning_rate": 0.001,
-     "window_size":50,
+     "window_size":70,
      "embedding_size":512,
      "vocab_size":50257
  }
