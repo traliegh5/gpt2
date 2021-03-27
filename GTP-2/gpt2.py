@@ -82,7 +82,7 @@ def train(experiment,model,hyper_params,train_loader):
             perp=math.exp(perp)
 
             experiment.log_metric("per_epoch_perplexity",perp)
-            experiment.log_metric("accuracy", accuracy)
+            
 
                 
         avg_loss=float(total_loss)/float(num_batches)
