@@ -88,9 +88,9 @@ class LanguageModel(Dataset):
                 
        
         self.tense=pad_sequence(self.tense,batch_first=True,padding_value=padding_value)
-        print("first five",self.tense[0:5,:])
+        
         self.masks=pad_sequence(self.masks,batch_first=True,padding_value=padding_value)
-        print("ff makss",self.masks[0:5,:])
+      
         
         
         

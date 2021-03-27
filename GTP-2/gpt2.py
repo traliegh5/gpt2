@@ -42,8 +42,8 @@ def train(experiment,model,hyper_params,train_loader):
             loss_tot=0
             batchnum=0
             for batch in tqdm(train_loader):
-                inputs=batch["inputs"][0:-1,:].to(device)
-                labels=batch["labels"][1:,:].to(device)
+                inputs=batch["inputs"][:,0:-1].to(device)
+                labels=batch["labels"][:,1:].to(device)
                 lens=batch["lengths"].to(device)
                 temp=torch.sum(lens)
                 word_count+=temp
