@@ -54,7 +54,7 @@ class LanguageModel(Dataset):
         self.tokenizer=tokenizer
         self.tense=[]
         self.masks=[]
-        self.window_size=window_size-2
+        self.window_size=window_size-1
 
         self.start=tokenizer.bos_token_id
         print(self.start)
