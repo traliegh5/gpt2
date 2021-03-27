@@ -18,6 +18,6 @@ class GPT2_Transformer(nn.Module):
 
     def forward(self, inputs,masks):
        
-        output=self.model(inputs,attention_mask=masks)
+        output=self.model(inputs,labels=inputs,attention_mask=masks)
 
         return output

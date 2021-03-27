@@ -99,8 +99,8 @@ def train(experiment,model,hyper_params,train_loader):
 def test(experiment, model,hyper_params,test_loader,GPT):
     if not GPT:
         loss_fn=nn.CrossEntropyLoss(ignore_index=hyper_params["vocab_size"])
-    else:
-        loss_fn=nn.CrossEntropyLoss(ignore_index=hyper_params["vocab_size"])
+   
+       
     
     model = model.eval()
     total_loss = 0
@@ -123,12 +123,12 @@ def test(experiment, model,hyper_params,test_loader,GPT):
                     # preds=out.logits
                     print(inputs.shape)
                     inner=inputs
-                    labs=labels[:,1:]
+                    labs=labels
                     mass=masks
-                    preds = model(inner,mass)
+                    loss = model(inner,mass).loss
                     
-                    preds=torch.reshape(preds,(-1,model.vocab_size))
-                    labels=torch.reshape(labs,(-1,))
+                    # preds=torch.reshape(preds,(-1,model.vocab_size))
+                    # labels=torch.reshape(labs,(-1,))
                     
                     # idx=labels!=hyper_params["vocab_size"]
                     # pred=torch.argmax(preds,dim=1)
@@ -137,7 +137,7 @@ def test(experiment, model,hyper_params,test_loader,GPT):
                     # acc=(labels==pred).sum().item()
                     # accuracy_total+=acc
                 
-                    loss = loss_fn(preds, labels)
+                    
                     
                     # print(out.logits.shape[2])
                 else:
@@ -150,12 +150,12 @@ def test(experiment, model,hyper_params,test_loader,GPT):
                     preds=torch.reshape(preds,(-1,model.vocab_size))
                     labels=torch.reshape(labs,(-1,))
                     
-                    idx=labels!=50257
-                    pred=torch.argmax(preds,dim=1)
-                    pred=pred[idx]
-                    labels=labels[idx]
-                    acc=(labels==pred).sum().item()
-                    accuracy_total+=acc
+                    # idx=labels!=50257
+                    # pred=torch.argmax(preds,dim=1)
+                    # pred=pred[idx]
+                    # labels=labels[idx]
+                    # acc=(labels==pred).sum().item()
+                    # accuracy_total+=acc
                 # print("x",y_pred.shape)
                 # print("y",y.shape)
                     loss = loss_fn(preds, labels)
@@ -166,14 +166,14 @@ def test(experiment, model,hyper_params,test_loader,GPT):
                 # nn.utils.clip_grad_norm_(model.parameters(), 20)
 
         
-        accuracy=float(accuracy_total)/float(word_count)
+        # accuracy=float(accuracy_total)/float(word_count)
         avg_loss=float(total_loss)/float(num_batches)
         perplexity=math.exp(avg_loss) 
         #perplex=torch.exp(total_loss/word_count)
         print("perplexity:", perplexity)
         #print("perplex:",perplex)
         experiment.log_metric("perplexity", perplexity)
-        experiment.log_metric("accuracy",accuracy)
+        # experiment.log_metric("accuracy",accuracy)
         pass
         # Log perplexity to Comet.ml using experiment.log_metric
     

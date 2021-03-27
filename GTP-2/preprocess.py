@@ -59,7 +59,7 @@ class LanguageModel(Dataset):
         self.start=tokenizer.bos_token_id
         print(self.start)
         if GPT:
-            padding_value=50257
+            padding_value=0
         else:
             padding_value=50257
         
