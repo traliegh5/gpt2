@@ -16,7 +16,7 @@ hyper_params = {
      "batch_size": 100,
      "num_epochs": 1,
      "learning_rate": 0.001,
-     "window_size":55,
+     "window_size":200,
      "embedding_size":512,
      "vocab_size":50257
  }
@@ -97,7 +97,7 @@ def train(experiment,model,hyper_params,train_loader):
     pass
 def test(experiment, model,hyper_params,test_loader,GPT):
     if not GPT:
-        loss_fn=nn.CrossEntropyLoss(ignore_index=hyper_params["vocab_size"])
+        loss_fn=nn.CrossEntropyLoss(ignore_index=hyper_params["vocab_size"],reduction='sum')
    
        
     
@@ -124,7 +124,7 @@ def test(experiment, model,hyper_params,test_loader,GPT):
                     inner=inputs
                     labs=labels
                     mass=masks
-                    loss = model(inner,mass).loss
+                    loss = model(inner,mass).loss*torch.sum(lens)
                     print(loss)
                     
                     # preds=torch.reshape(preds,(-1,model.vocab_size))
