@@ -27,7 +27,7 @@ experiment.log_parameters(hyper_params)
 def train(experiment,model,hyper_params,train_loader):
     torch.cuda.empty_cache()
     
-    loss_fn=nn.CrossEntropyLoss(ignore_index=hyper_params["vocab_size"],reduction='sum')
+    loss_fn=nn.CrossEntropyLoss(ignore_index=hyper_params["vocab_size"],reduction='mean')
     optimizer=optim.Adam(model.parameters(),lr=hyper_params["learning_rate"])
     model = model.train()
     total_loss = 0
