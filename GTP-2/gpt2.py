@@ -61,7 +61,7 @@ def train(experiment,model,hyper_params,train_loader):
                 print(loss)
                 loss.backward() # calculate gradients
                 loss_tot+=loss
-                total_loss+=loss*
+                total_loss+=loss
                 num_batches+=1
                 batchnum+=1
                 # nn.utils.clip_grad_norm_(model.parameters(), 20)
