@@ -37,17 +37,14 @@ def train(experiment,model,hyper_params,train_loader):
     with experiment.train():
         
         for i in range(hyper_params["num_epochs"]):
-            accuracy_total=0
-            total_units=0
-            loss_tot=0
-            batchnum=0
+            
             for batch in tqdm(train_loader):
                 inputs=batch["inputs"][:,0:-1].to(device)
                 labels=batch["labels"][:,1:].to(device)
                 lens=batch["lengths"].to(device)
                 temp=torch.sum(lens)
                 word_count+=temp
-                total_units+=temp
+               
                 optimizer.zero_grad()
                 #print(x.shape)
                 preds = model(inputs)
@@ -60,10 +57,10 @@ def train(experiment,model,hyper_params,train_loader):
                 loss = loss_fn(preds, labels)
               
                 loss.backward() # calculate gradients
-                loss_tot+=loss
+                
                 total_loss+=loss
                 num_batches+=1
-                batchnum+=1
+               
                 # nn.utils.clip_grad_norm_(model.parameters(), 20)
                 optimizer.step() 
                
@@ -76,13 +73,14 @@ def train(experiment,model,hyper_params,train_loader):
                 del inputs
                 del labels
                 del preds
+                del lens
+
+                del loss
 
                 gc.collect()
+                torch.cuda.empty_cache()
             # accuracy=float(accuracy_total)/float(total_units)
-            perp=float(loss_tot)/float(batchnum)
-            perp=math.exp(perp)
-
-            experiment.log_metric("per_epoch_perplexity",perp)
+        
             
 
                 
