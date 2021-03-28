@@ -88,7 +88,7 @@ class LanguageModel(Dataset):
                 
        
         self.tense=pad_sequence(self.tense,batch_first=True,padding_value=padding_value)
-        
+        print(max(self.lengths))
         self.masks=pad_sequence(self.masks,batch_first=True,padding_value=padding_value)
       
         

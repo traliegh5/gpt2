@@ -16,7 +16,7 @@ hyper_params = {
      "batch_size": 100,
      "num_epochs": 1,
      "learning_rate": 0.001,
-     "window_size":70,
+     "window_size":100,
      "embedding_size":512,
      "vocab_size":50257
  }
@@ -58,9 +58,10 @@ def train(experiment,model,hyper_params,train_loader):
                 # print("x",y_pred.shape)
                 # print("y",y.shape)
                 loss = loss_fn(preds, labels)
+                print(loss)
                 loss.backward() # calculate gradients
                 loss_tot+=loss
-                total_loss+=loss
+                total_loss+=loss*
                 num_batches+=1
                 batchnum+=1
                 # nn.utils.clip_grad_norm_(model.parameters(), 20)
@@ -126,6 +127,7 @@ def test(experiment, model,hyper_params,test_loader,GPT):
                     labs=labels
                     mass=masks
                     loss = model(inner,mass).loss
+                    print(loss)
                     
                     # preds=torch.reshape(preds,(-1,model.vocab_size))
                     # labels=torch.reshape(labs,(-1,))
