@@ -58,7 +58,7 @@ def train(experiment,model,hyper_params,train_loader):
                 # print("x",y_pred.shape)
                 # print("y",y.shape)
                 loss = loss_fn(preds, labels)
-                print(loss)
+              
                 loss.backward() # calculate gradients
                 loss_tot+=loss
                 total_loss+=loss
