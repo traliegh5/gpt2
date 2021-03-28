@@ -16,7 +16,7 @@ hyper_params = {
      "batch_size": 100,
      "num_epochs": 1,
      "learning_rate": 0.001,
-     "window_size":50,
+     "window_size":55,
      "embedding_size":512,
      "vocab_size":50257
  }
@@ -27,7 +27,7 @@ experiment.log_parameters(hyper_params)
 def train(experiment,model,hyper_params,train_loader):
     torch.cuda.empty_cache()
     
-    loss_fn=nn.CrossEntropyLoss(ignore_index=hyper_params["vocab_size"])
+    loss_fn=nn.CrossEntropyLoss(ignore_index=hyper_params["vocab_size"],reduction='sum')
     optimizer=optim.Adam(model.parameters(),lr=hyper_params["learning_rate"])
     model = model.train()
     total_loss = 0
@@ -84,7 +84,7 @@ def train(experiment,model,hyper_params,train_loader):
             
 
                 
-        avg_loss=float(total_loss)/float(num_batches)
+        avg_loss=float(total_loss)/float(word_count)
         perplexity=math.exp(avg_loss) 
         #perplex=torch.exp(total_loss/word_count)
         print("perplexity:", perplexity)
@@ -167,7 +167,7 @@ def test(experiment, model,hyper_params,test_loader,GPT):
 
         
         # accuracy=float(accuracy_total)/float(word_count)
-        avg_loss=float(total_loss)/float(num_batches)
+        avg_loss=float(total_loss)/float(word_count)
         perplexity=math.exp(avg_loss) 
         #perplex=torch.exp(total_loss/word_count)
         print("perplexity:", perplexity)
