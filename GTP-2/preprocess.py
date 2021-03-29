@@ -124,7 +124,7 @@ class LanguageModel(Dataset):
         """
         # TODO: Override method to return the items in dataset
        
-        item={"inputs":self.tense[idx,:],"lengths":self.lengths[idx],"labels":self.tense[idx,:],"masks":self.masks[idx,:]}
+        item={"inputs":self.tense[idx,:],"lengths":self.lengths[idx],"labels":self.tense[idx,1:],"masks":self.masks[idx,:]}
         
         return item
 

@@ -40,7 +40,7 @@ def train(experiment,model,hyper_params,train_loader):
             
             for batch in tqdm(train_loader):
                 inputs=batch["inputs"][:,0:-1].to(device)
-                labels=batch["labels"][:,1:].to(device)
+                labels=batch["labels"].to(device)
                 lens=batch["lengths"].to(device)
                 temp=torch.sum(lens)
                 word_count+=temp
@@ -124,7 +124,8 @@ def test(experiment, model,hyper_params,test_loader,GPT):
                     inner=inputs
                     labs=labels
                     mass=masks
-                    loss = model(inner,mass).loss*torch.sum(lens)
+                    lost = model(inner,mass).loss
+                    loss=lost*torch.mean(lens.float())
                     print(loss)
                     
                     # preds=torch.reshape(preds,(-1,model.vocab_size))
@@ -142,7 +143,7 @@ def test(experiment, model,hyper_params,test_loader,GPT):
                     # print(out.logits.shape[2])
                 else:
                     inner=inputs[:,0:-1]
-                    labs=labels[:,1:]
+                    labs=labels
                     preds = model(inner)
                     # print("x",y_pred.shape)
                     # print("y",y.shape)
